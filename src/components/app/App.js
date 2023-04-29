@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import ContactForm from 'components/contactForm';
 import Filter from 'components/filter';
 import { ContactList } from 'components/contactList';
+
 import './App.css';
 
 function App() {
@@ -19,7 +20,6 @@ function App() {
       if (!parsedContacts) {
         return;
       }
-
       setContacts(parsedContacts);
     }
     localStorage.setItem('contacts', JSON.stringify(contacts));
@@ -34,7 +34,6 @@ function App() {
       alert(`${item.name} is already in contacts.`);
       return;
     }
-
     setContacts(prevContacts => [...prevContacts, item]);
   };
 
@@ -51,15 +50,14 @@ function App() {
     );
   };
 
-  const changeFilter = e => {
-    setFilter(e.currentTarget.value);
+  const changeFilter = event => {
+    setFilter(event.currentTarget.value);
   };
 
   return (
     <div className="container">
       <h1>Phonebook</h1>
       <ContactForm onAddNewContact={addNewContact} />
-
       <h2>Contacts</h2>
       <Filter value={filter} onChange={changeFilter} />
       <ContactList
