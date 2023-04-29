@@ -1,0 +1,11 @@
+.filter-label {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.filter-input {
+  max-width: 300px;
+  font-size: 16px;
+  padding: 3px;
+}
