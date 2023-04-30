@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 import ContactForm from 'components/contactForm';
 import Filter from 'components/filter';
@@ -7,21 +7,12 @@ import { ContactList } from 'components/contactList';
 import './App.css';
 
 function App() {
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useState(() => {
+    return JSON.parse(localStorage.getItem('contacts')) ?? [];
+  });
   const [filter, setFilter] = useState('');
-  const isNotReadFromLocalStorage = useRef(true);
 
   useEffect(() => {
-    if (isNotReadFromLocalStorage.current) {
-      const contacts = localStorage.getItem('contacts');
-      const parsedContacts = JSON.parse(contacts);
-      isNotReadFromLocalStorage.current = false;
-
-      if (!parsedContacts) {
-        return;
-      }
-      setContacts(parsedContacts);
-    }
     localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
 
